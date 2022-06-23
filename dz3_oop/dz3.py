@@ -31,7 +31,9 @@ class Url:
         if len(self.fragment) > 0:
             text += "#"
             for fragments in self.fragment:
-                text += f"{fragments}"
+                text += f"{fragments}#"
+            text = text[:-1]
+            self.fragment.clear()
         return text
 
 class HttpUrl(Url):
@@ -73,3 +75,9 @@ class UrlCreator(Url):
         self.path.append(name)
         return UrlCreator(self.scheme, self.authority, self.path)
 
+url_creator = UrlCreator(scheme='https', authority='docs.python.org')
+assert url_creator.docs.v1.api.list == 'https://docs.python.org/docs/v1/api/list'
+assert url_creator(api,v1,list) == 'https://docs.python.org/api/v1/list'
+assert url_creator(api,v1,list, q='my_list') == 'https://docs.python.org/api/v1/list?q=my_list'
+
+assert url_creator('3').search(q='getattr', check_keywords='yes', area='default')._create()  == 'https://docs.python.org/3/search?q=getattr&check_keywords=yes&area=default'
