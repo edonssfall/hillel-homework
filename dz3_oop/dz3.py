@@ -1,5 +1,4 @@
 
-
 class Url:
 
     def __init__(self, scheme = str(), authority = str(), path = list(), query = dict(), fragment = list()):
