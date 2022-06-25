@@ -3,7 +3,6 @@ from time import strftime
 from socket import gethostname, gethostbyname
 from random import choice
 
-
 app = Flask(__name__)
 
 @app.route("/whoami/")
