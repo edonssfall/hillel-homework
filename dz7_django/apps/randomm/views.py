@@ -11,7 +11,7 @@ def randomm(request):
     length = request.GET.get('length')
     if length == None:
         length = 0
-    if not 1 <= int(length) <= 100:
+    if not length.isdigit() or not 1 <= int(length) <= 100:
         return render(request, 'warning_random.html', context={'length':length})
     else:
         if digits or digits == "1":
